@@ -43,6 +43,7 @@ class FFRL_Donationstatus extends WP_Widget
 		echo '<ul>';
 		echo '<li>Spendenziel: '.number_format($instance['donateGoal'],0,',','\'') . '&euro;</li>';
 		echo '<li>Aktueller Stand: '.number_format($instance['currentStatus'],2,',','\'') . '&euro;</li>';
+		echo '<li>Aktualisiert: '.$instance['lastUpdate'].'</li>';
 		echo '</ul>';
 
 		echo '<p>'.$instance['text'].'</p>';
@@ -121,6 +122,17 @@ class FFRL_Donationstatus extends WP_Widget
 	</p>
 	<?php
 
+		if (isset($instance['lastUpdate']))
+			$lastUpdate = $instance['lastUpdate'];
+		?>
+	<p>
+		<label for="<?php echo $this->get_field_id('lastUpdate'); ?>"><?php _e('Last update:'); ?></label>
+		<input class="widefat" id="<?php echo $this->get_field_id('lastUpdate'); ?>"
+			   name="<?php echo $this->get_field_name('lastUpdate'); ?>" type="text"
+			   value="<?php echo esc_attr($lastUpdate); ?>"/>
+	</p>
+	<?php
+
 
 		$text = "";
 		if (isset($instance['text']))
@@ -154,6 +166,7 @@ class FFRL_Donationstatus extends WP_Widget
 		$instance['currentStatus']	= (float) $new_instance['currentStatus'];
 		$instance['text']			= strip_tags($new_instance['text']);
 		$instance['title']			= strip_tags($new_instance['title']);
+		$instance['lastUpdate']			= strip_tags($new_instance['lastUpdate']);
 
 		return $instance;
 	}
