@@ -34,12 +34,13 @@ class FFRL_Donationstatus extends WP_Widget
 		$percentage = $instance['currentStatus'] / $instance['donateGoal'];
 
 		echo $before_widget;
+		echo '<div id="ffrlDonation">';
 		echo '<h3>' . $title . '</h3>';
+		echo '<h4>Status</h4>';
 		echo $this->getPercentageImage($instance, $percentage);
 
-		echo '<div style="text-align: center;">';
-		echo '<h4>Status</h4>';
-		echo '<ul style="list-style: none;">';
+		echo '<div class="infoText">';
+		echo '<ul>';
 		echo '<li>Spendenziel: '.number_format($instance['donateGoal'],0,',','\'') . '&euro;</li>';
 		echo '<li>Aktueller Stand: '.number_format($instance['currentStatus'],2,',','\'') . '&euro;</li>';
 		echo '</ul>';
@@ -49,14 +50,15 @@ class FFRL_Donationstatus extends WP_Widget
 
 		echo '</div>';
 
+		echo '</div>';
 		echo $after_widget;
 	}
 
 	public function getPercentageImage($instance, $percentage)
 	{
-		return '<div style="height:181px;width:251px;position:relative;background-image:url(' . getImageUrl('logoGrau.png') . ')">
-			<div style="height:' . floor(181 * $percentage) . 'px;width:251px;position:absolute;bottom:0;background:url(' . getImageUrl('logoFarbe.png') . ') bottom"></div>
-			<span style="font-size:25px;font-weight:bold;position:absolute;left: 120px;top:60px;color:#FFB400">'.number_format($percentage*100,1).'%</span>
+		return '<div class="statusImage background">
+			<div class="statusImage foreground" style="height:' . floor(181 * $percentage) . 'px;"></div>
+			<span>'.number_format($percentage*100,1).'%</span>
 		</div>';
 	}
 
@@ -161,10 +163,16 @@ function getImageUrl($imagename) {
 	return plugins_url($imagename, __FILE__);
 }
 
-function akismet_register_widgets() {
+function ffrl_registerWidgets() {
 	register_widget('FFRL_Donationstatus');
 }
 
-add_action( 'widgets_init', 'akismet_register_widgets' );
+function ffrl_addStylesheet() {
+	wp_register_style( 'prefix-style', plugins_url('style.css', __FILE__) );
+	wp_enqueue_style( 'prefix-style' );
+}
+
+add_action( 'widgets_init', 'ffrl_registerWidgets' );
+add_action( 'wp_enqueue_scripts', 'ffrl_addStylesheet' );
 
 

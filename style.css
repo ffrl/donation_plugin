@@ -1,0 +1,41 @@
+#ffrlDonation h3 {
+	padding-bottom: 15px;
+	text-align: center;
+}
+
+#ffrlDonation h4 {
+	padding-bottom: 15px;
+	text-align: center;
+}
+
+#ffrlDonation .statusImage {
+	height: 181px;
+	width: 251px;
+}
+#ffrlDonation .statusImage.background {
+	position:relative;
+	background-image: url('logoGrau.png');
+}
+
+#ffrlDonation .statusImage.foreground {
+	position:absolute;
+	bottom:0;
+	background:url('logoFarbe.png') bottom;
+}
+#ffrlDonation .statusImage span {
+	font-size:25px;
+	font-weight:bold;
+	position:absolute;
+	left: 120px;
+	top:60px;
+	color:#FFB400;
+}
+
+#ffrlDonation .infoText {
+	text-align: center;
+	margin-top: 15px;
+}
+
+#ffrlDonation .infoText ul {
+	list-style: none;
+}
