@@ -32,6 +32,8 @@ class FFRL_Donationstatus extends WP_Widget
 		extract($args);
 		$title = apply_filters('widget_title', $instance['title']);
 		$percentage = $instance['currentStatus'] / $instance['donateGoal'];
+		if($percentage > 100)
+			$percentage = 100;
 
 		echo $before_widget;
 		echo '<div id="ffrlDonation">';
